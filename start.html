@@ -1,0 +1,92 @@
+<html>
+    <style>
+        .schlange {
+            background: aqua;
+            width: 5mm;
+            height: 5mm;
+            position: absolute;
+            top: 100mm;
+            left: 100mm;
+        }
+        #käfig {
+            background-color: whitesmoke;
+            border: 5mm solid black;
+            position: relative;
+            height: 150mm;
+            width: 200mm;
+        }
+    </style>
+    <body>
+        <h1>Son goku - Snake</h1>
+        <div id="käfig">
+            <div class="schlange"></div>
+        </div>
+        <div id="position-oben"></div>
+        <div id="position-links"></div>
+    </body>
+    <script>
+        // check 1. schlange soll laufen
+        // check 2. schlange steuern
+        // check 3. schlange soll im käfig bleiben
+        // 3. schlange soll wachsen
+        // 4. schlange soll sterben
+        // 5. schlange soll schneller werden
+        // 6. punktesammeln und anzeigen
+        // 7. highscore merken
+
+        let oben = 0;
+        let links = 0;
+        let richtung = "runter";
+
+        setInterval(() => {
+            if (richtung === "runter") {
+                oben = oben + 5;
+                if (oben > 145) oben = 0;
+            }
+            if (richtung === "hoch") {
+                oben = oben - 5;
+                if (oben < 0) oben = 145;
+            }
+            if (richtung === "rechts") {
+                links = links + 5;
+                if (links > 195) links = 0;
+            }
+            if (richtung === "links") {
+                links = links - 5;
+                if (links < 0) links = 195;
+            }
+            let schlange = document.createElement("div");
+            schlange.classList.add("schlange");
+            document.getElementById("käfig").appendChild(schlange);
+            schlange.style.top = `${oben}mm`;
+            schlange.style.left = `${links}mm`;
+            document.getElementById("position-oben").textContent = oben;
+            document.getElementById("position-links").textContent = links;
+        }, 500);
+
+        document.body.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight" && richtung !== "links") {
+                richtung = "rechts";
+                event.preventDefault();
+            }
+            if (event.key === "ArrowLeft" && richtung !== "rechts") {
+                richtung = "links";
+                event.preventDefault();
+            }
+            if (event.key === "ArrowUp" && richtung !== "runter") {
+                richtung = "hoch";
+                event.preventDefault();
+            }
+            if (event.key === "ArrowDown" && richtung !== "hoch") {
+                richtung = "runter";
+                event.preventDefault();
+            }
+            if (event.key === " ") {
+                richtung = "pause";
+                event.preventDefault();
+            }
+
+            document.body.append(`taste gedrückt - ${event.key}`);
+        });
+    </script>
+</html>
