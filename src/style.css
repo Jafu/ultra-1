@@ -1,0 +1,19 @@
+:root {
+    --pixel-size: 5mm;
+}
+.schlange {
+    background: aqua;
+    width: var(--pixel-size);
+    height: var(--pixel-size);
+    position: absolute;
+    top: 100mm;
+    left: 100mm;
+}
+
+#käfig {
+    background-color: whitesmoke;
+    border: var(--pixel-size) solid black;
+    position: relative;
+    height: 150mm;
+    width: 200mm;
+}
